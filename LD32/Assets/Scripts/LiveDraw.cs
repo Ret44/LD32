@@ -83,7 +83,11 @@ public class LiveDraw : MonoBehaviour {
 		audioSauce.GetSpectrumData(spectrum, 0, FFTWindow.Hanning);
 		int i = 1;
 		if (calibratePew) {
-			spectrum.CopyTo(pewBandSpectrum,0);
+			for(int ia=0;ia<WINDOW_SIZE;ia++)
+			{
+				if(pewBandSpectrum[ia]<spectrum[ia]) pewBandSpectrum[ia] = spectrum[ia];
+			}
+			//spectrum.CopyTo(pewBandSpectrum,0);
 			calibrationTimer-=Time.deltaTime;
 			uiText.text = "";
 			isPlaying = true;
@@ -97,15 +101,16 @@ public class LiveDraw : MonoBehaviour {
 			int pewSimilarity = 0,bangSimilarity =0;
 			for(int ind=0;ind<WINDOW_SIZE;ind++)
 			{
-				if(spectrum[ind] >= pewBandSpectrum[ind] - error)
+				if(spectrum[ind] >= pewBandSpectrum[ind])
 					pewSimilarity++;
-				if(spectrum[ind] >= bangBandSpectrum[ind] - error)
+				if(spectrum[ind] >= bangBandSpectrum[ind])
 					bangSimilarity++;
 			}
 			if(pewSimilarity>(WINDOW_SIZE*scanError)) uiText.text = "PEW!";
-			else uiText.text = "";
+			else uiText.text = ""; 
 		}
 		if (Input.GetKey (KeyCode.Q)) {
+			for(int a=0;a<WINDOW_SIZE;a++) pewBandSpectrum[a] = 0f;
 			calibrationTimer = 1.5f;
 			calibratePew = true;
 			uiText.text = "Calibrating - say Pew";
