@@ -94,7 +94,15 @@ public class LiveDraw : MonoBehaviour {
 			calibratePew = false;
 		}
 		if (calibrateBang) {
-			spectrum.CopyTo(bangBandSpectrum,0);
+			for(int ia=0;ia<WINDOW_SIZE;ia++)
+			{
+				if(bangBandSpectrum[ia]<spectrum[ia]) bangBandSpectrum[ia] = spectrum[ia];
+			}
+			//spectrum.CopyTo(pewBandSpectrum,0);
+			calibrationTimer-=Time.deltaTime;
+			uiText.text = "";
+			isPlaying = true;
+			calibrateBang = false;
 		}
 
 		if (isPlaying) {
@@ -106,7 +114,8 @@ public class LiveDraw : MonoBehaviour {
 				if(spectrum[ind] >= bangBandSpectrum[ind])
 					bangSimilarity++;
 			}
-			if(pewSimilarity>(WINDOW_SIZE*scanError)) uiText.text = "PEW!";
+			if(pewSimilarity>(WINDOW_SIZE*scanError)) uiText.text = "PEW!"+pewSimilarity;
+			//if(bangSimilarity>(WINDOW_SIZE*scanError)) uiText.text = "BANG!"+bangSimilarity;
 			else uiText.text = ""; 
 		}
 		if (Input.GetKey (KeyCode.Q)) {
@@ -116,17 +125,24 @@ public class LiveDraw : MonoBehaviour {
 			uiText.text = "Calibrating - say Pew";
 			isPlaying = false;
 		}
+	//	if (Input.GetKey (KeyCode.W) && !Input.GetKey (KeyCode.Q)) {
+	//		for(int a=0;a<WINDOW_SIZE;a++) bangBandSpectrum[a] = 0f;
+//calibrationTimer = 1.5f;
+//calibrateBang = true;
+	//		uiText.text = "Calibrating - say Bang";
+	//		isPlaying = false;
+	//	}
 		
 
 		while (i < WINDOW_SIZE) {
 			Debug.DrawLine( new Vector3(i - 1, 50000f * spectrum[i - 1] + 10, 0), 
 			               new Vector3(i, 50000f * spectrum[i] + 10, 0), 
 			               Color.red);
-			Debug.DrawLine( new Vector3(i - 1, Mathf.Log(spectrum[i - 1]) + 10, 2),
-			               new Vector3(i, Mathf.Log(spectrum[i]) + 10, 2),
+			Debug.DrawLine( new Vector3(i - 1, 50000f * pewBandSpectrum[i - 1] + 10, 0), 
+			               new Vector3(i, 50000f * pewBandSpectrum[i] + 10, 0), 
 			               Color.cyan);
-			Debug.DrawLine( new Vector3(Mathf.Log(i - 1), spectrum[i - 1] - 10, 1), 
-			               new Vector3(Mathf.Log(i), spectrum[i] - 10, 1), 
+			Debug.DrawLine( new Vector3(i - 1, 50000f * bangBandSpectrum[i - 1] + 10, 0), 
+			               new Vector3(i, 50000f * bangBandSpectrum[i] + 10, 0), 
 			               Color.green);
 			Debug.DrawLine( new Vector3(Mathf.Log(i - 1), Mathf.Log(spectrum[i - 1]), 3), 
 			               new Vector3(Mathf.Log(i), Mathf.Log(spectrum[i]), 3), 
