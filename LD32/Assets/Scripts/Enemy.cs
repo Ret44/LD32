@@ -50,7 +50,7 @@ public class Enemy : MonoBehaviour {
 		if (mode == EnemyMode.Walking) {
 			Vector3 oldPos = this.transform.position;
 			this.transform.Translate (direction * speed * Time.deltaTime, Space.World);
-			this.transform.localPosition = new Vector3(this.transform.localPosition.x,-2.52f,this.transform.localPosition.z);
+			this.transform.localPosition = new Vector3(this.transform.localPosition.x,-2.977f,this.transform.localPosition.z);
 			if (Vector3.Distance (oldPos, Player.instance.transform.position) > Vector3.Distance (this.transform.position, Player.instance.transform.position)) {
 				//SwitchAnimation(forwardSprite);
 				animator.SetTrigger("forward");
