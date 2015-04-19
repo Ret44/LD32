@@ -9,6 +9,9 @@ public enum EnemyMode{
 
 public class Enemy : MonoBehaviour {
 
+
+	public int HP;
+
 	public EnemyMode mode;
 	public Vector3 direction;
 	public float speed;
@@ -17,6 +20,9 @@ public class Enemy : MonoBehaviour {
 	public GameObject dyingSprite;
 	public GameObject shootingSprite;
 
+	public Animator animator;
+
+	public bool isRekt;
 
 
 	public float shotTimer;
@@ -27,6 +33,7 @@ public class Enemy : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		direction = Vector3.forward;
+		animator = transform.FindChild ("kidsheet_0").GetComponent<Animator>();
 	}
 
 	public void SwitchAnimation(GameObject obj)
@@ -43,10 +50,13 @@ public class Enemy : MonoBehaviour {
 		if (mode == EnemyMode.Walking) {
 			Vector3 oldPos = this.transform.position;
 			this.transform.Translate (direction * speed * Time.deltaTime, Space.World);
+			this.transform.localPosition = new Vector3(this.transform.localPosition.x,-2.52f,this.transform.localPosition.z);
 			if (Vector3.Distance (oldPos, Player.instance.transform.position) > Vector3.Distance (this.transform.position, Player.instance.transform.position)) {
-				SwitchAnimation(forwardSprite);
+				//SwitchAnimation(forwardSprite);
+				animator.SetTrigger("forward");
 			} else {
-				SwitchAnimation (backSprite);
+			//	SwitchAnimation (backSprite);
+				animator.SetTrigger("backward");
 			}
 			RaycastHit hit;
 			if (Physics.Raycast (this.transform.position, direction * 2, 2f)) {
@@ -80,7 +90,8 @@ public class Enemy : MonoBehaviour {
 			if(!shot)
 			{
 				shot = true;
-				SwitchAnimation(shootingSprite);
+				//SwitchAnimation(shootingSprite);
+				animator.SetTrigger("shoot");
 				GameObject bullet = Instantiate (Spawner.instance.bullet, this.transform.position + this.transform.forward * 2, this.transform.rotation) as GameObject;
 				bullet.GetComponent<Projectile>().isEnemy = true;				                               
 			}
@@ -90,6 +101,16 @@ public class Enemy : MonoBehaviour {
 				shootTimer = shotTimer;
 				shot = false;
 				mode = EnemyMode.Walking;
+			}
+		}
+		if (mode == EnemyMode.Dying) {
+			if(!isRekt){
+				///SwitchAnimation(dyingSprite);
+				animator.SetTrigger("die");
+				GetComponent<LookAtPlayer>().enabled = false;
+				GetComponent<Rigidbody>().useGravity = true;
+				GetComponent<Rigidbody>().AddForce(-transform.forward * 2);
+				isRekt = true;
 			}
 		}
 	}

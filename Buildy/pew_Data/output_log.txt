@@ -14,7 +14,7 @@ Platform assembly: D:\ProjektyUnity\LD32Git\Buildy\pew_Data\Managed\Assembly-CSh
 Loading D:\ProjektyUnity\LD32Git\Buildy\pew_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: D:\ProjektyUnity\LD32Git\Buildy\pew_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading D:\ProjektyUnity\LD32Git\Buildy\pew_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.052 seconds
+- Completed reload, in  0.055 seconds
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
@@ -30,7 +30,31 @@ Device: Miks stereo (Realtek High Definition Audio)
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
 
 Setting up 1 worker threads for Enlighten.
-  Thread -> id: 2754 -> priority: 1 
+  Thread -> id: 1814 -> priority: 1 
+Starting thing
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Starting thing
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Starting thing
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Starting thing
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Starting thing
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Starting thing
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
 Starting thing
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)

@@ -9,12 +9,7 @@ public class TimedDeath : MonoBehaviour {
 	void Start () {
 	
 	}
-
-	void OnCollisionEnter(Collision col)
-	{
-		Destroy (this.gameObject);
-	}
-
+	
 	// Update is called once per frame
 	void Update () {
 		TimeToDie -= Time.deltaTime;
