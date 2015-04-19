@@ -114,7 +114,7 @@ public class LiveDraw : MonoBehaviour {
 				if(spectrum[ind] >= bangBandSpectrum[ind])
 					bangSimilarity++;
 			}
-			if(pewSimilarity>(WINDOW_SIZE*scanError)) uiText.text = "PEW!"+pewSimilarity;
+			if(pewSimilarity>(WINDOW_SIZE*scanError)){uiText.text = "PEW!"+pewSimilarity; Player.Shoot (); }
 			//if(bangSimilarity>(WINDOW_SIZE*scanError)) uiText.text = "BANG!"+bangSimilarity;
 			else uiText.text = ""; 
 		}
