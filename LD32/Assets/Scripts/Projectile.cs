@@ -4,6 +4,7 @@ using System.Collections;
 public class Projectile : MonoBehaviour {
 
 	public float speed;
+	public bool isEnemy;
 	// Use this for initialization
 	void Start () {
 	
