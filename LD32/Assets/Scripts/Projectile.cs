@@ -20,6 +20,10 @@ public class Projectile : MonoBehaviour {
 				col.collider.GetComponent<Enemy>().mode = EnemyMode.Dying;
 			}
 		}
+		if (col.collider.gameObject.tag == "Player" && isEnemy) {
+			//col.collider.GetComponent<Enemy>().HP-=DMG;
+			Player.Hit (DMG);
+		}
 		Destroy (this.gameObject);
 	}
 

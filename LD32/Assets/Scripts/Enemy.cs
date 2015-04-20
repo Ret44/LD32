@@ -93,7 +93,8 @@ public class Enemy : MonoBehaviour {
 				//SwitchAnimation(shootingSprite);
 				animator.SetTrigger("shoot");
 				GameObject bullet = Instantiate (Spawner.instance.bullet, this.transform.position + this.transform.forward * 2, this.transform.rotation) as GameObject;
-				bullet.GetComponent<Projectile>().isEnemy = true;				                               
+				bullet.GetComponent<Projectile>().isEnemy = true;	
+				bullet.GetComponent<Projectile>().DMG = 4;
 			}
 			shootTimer-=Time.deltaTime;
 			if(shootTimer<=0)

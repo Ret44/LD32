@@ -11,7 +11,9 @@ public class LiveDraw : MonoBehaviour {
 	public float pewBand = 0f;
 
 	public float bangBand = 0f;
-	
+
+	public Image slider;
+
 	public bool calibratePew;
 	public bool calibrateBang;
 	public bool isPlaying;
@@ -114,7 +116,11 @@ public class LiveDraw : MonoBehaviour {
 				if(spectrum[ind] >= bangBandSpectrum[ind])
 					bangSimilarity++;
 			}
-			if(pewSimilarity>(WINDOW_SIZE*scanError)){uiText.text = "PEW!"+pewSimilarity; Player.Shoot (); }
+			//224 - 512
+		//	x    - a
+
+			slider.rectTransform.sizeDelta = new Vector2(pewSimilarity*224/WINDOW_SIZE,slider.rectTransform.sizeDelta.y);
+			if(pewSimilarity>(WINDOW_SIZE*scanError) && !calibratePew){uiText.text = "PEW!"+pewSimilarity; Player.Shoot (); }
 			//if(bangSimilarity>(WINDOW_SIZE*scanError)) uiText.text = "BANG!"+bangSimilarity;
 			else uiText.text = ""; 
 		}
